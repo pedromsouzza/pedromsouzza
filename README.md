@@ -26,4 +26,3 @@
   <img height="160em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pedromsouzza&layout=compact&langs_count=7&theme=tokyonight"/>
 </div> 
 
-![Snake animation](https://github.com/pedromsouzza/pedromsouzza/blob/output/github-contribution-grid-snake.svg)
