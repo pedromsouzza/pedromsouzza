@@ -1,7 +1,7 @@
 name: CI + Snake Animation
 
 on:
-  schedule: # executar a cada 12 horas
+  schedule: # Executar a cada 12 horas
     - cron: "0 */12 * * *"
   push:
     branches: [ "main" ]
@@ -13,7 +13,7 @@ jobs:
   snake:
     name: Gerar animação da cobra
     runs-on: ubuntu-latest
-    continue-on-error: true # se falhar, o workflow continua
+    continue-on-error: true # Continua mesmo se falhar
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
           svg_out_path: dist/github-contribution-grid-snake.svg
 
       - name: Publicar no GitHub Pages
-        if: success() # só tenta publicar se o step anterior deu certo
+        if: success() # Só publica se o step anterior deu certo
         uses: crazy-max/ghaction-github-pages@v2.1.3
         with:
           target_branch: output
@@ -37,17 +37,13 @@ jobs:
   build:
     name: Job de build e teste
     runs-on: ubuntu-latest
-    needs: snake # roda depois do job snake, mas independente se falhou
+    needs: snake # roda depois do job snake
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
 
-      - name: Executa um script de uma linha
-        run: echo "Olá, mundo!"
-
-      - name: Executa um script multi-linha
+      - name: Executar scripts de build
         run: |
+          echo "Olá, mundo!"
           echo "Adicionar outras ações para build"
-          echo "Rodar testes e implantar projeto"inha
-        run: |
-          echo "Adicionar outras ações para build"
-          echo "Rodar testes e implantar projeto"r testes e implantar projeto"
+          echo "Rodar testes e implantar projeto"
