@@ -13,14 +13,21 @@ jobs:
   snake:
     name: Gerar animação da cobra
     runs-on: ubuntu-latest
+    continue-on-error: true # se falhar, o workflow continua
     steps:
-      - uses: Platane/snk@master
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Gerar SVG da cobra
         id: cobra-gif
+        uses: Platane/snk@master
         with:
           github_user_name: pedromsouzza
           svg_out_path: dist/github-contribution-grid-snake.svg
 
-      - uses: crazy-max/ghaction-github-pages@v2.1.3
+      - name: Publicar no GitHub Pages
+        if: success() # só tenta publicar se o step anterior deu certo
+        uses: crazy-max/ghaction-github-pages@v2.1.3
         with:
           target_branch: output
           build_dir: dist
@@ -30,6 +37,7 @@ jobs:
   build:
     name: Job de build e teste
     runs-on: ubuntu-latest
+    needs: snake # roda depois do job snake, mas independente se falhou
     steps:
       - uses: actions/checkout@v4
 
@@ -37,6 +45,9 @@ jobs:
         run: echo "Olá, mundo!"
 
       - name: Executa um script multi-linha
+        run: |
+          echo "Adicionar outras ações para build"
+          echo "Rodar testes e implantar projeto"inha
         run: |
           echo "Adicionar outras ações para build"
           echo "Rodar testes e implantar projeto"r testes e implantar projeto"
