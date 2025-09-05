@@ -40,6 +40,3 @@ jobs:
         run: |
           echo "Adicionar outras ações para build"
           echo "Rodar testes e implantar projeto"
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
